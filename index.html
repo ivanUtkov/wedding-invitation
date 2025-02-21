@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Приглашение на свадьбу</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Animate.css for animations -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <!-- AOS Library for scroll animations -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- Google Fonts: Roboto, Playfair Display, Lora, Poppins -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lora&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    /* Reset и базовые стили */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Roboto', sans-serif; background: #f7f7f7; color: #333; line-height: 1.6; }
+    a { text-decoration: none; color: inherit; }
+    
+    /* Навигация */
+    .navbar {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      transition: background 0.3s;
+    }
+    /* Гарантируем, что бренд и кнопка всегда остаются в одной строке */
+    .navbar .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .navbar-brand, .nav-link, .navbar-toggler {
+      white-space: nowrap;
+    }
+    .navbar-brand, .nav-link { font-family: 'Poppins', sans-serif; font-weight: 600; }
+    .navbar-brand { font-size: 1.8rem; }
+    .navbar-toggler { margin-left: auto; }
+    /* Для навигационных ссылок – запрещаем перенос строк */
+    .navbar-nav .nav-link {
+      white-space: nowrap;
+    }
+    
+    /* Хедер: уменьшена высота, шрифты и предотвращение переноса для широких экранов */
+    header {
+      position: relative;
+      width: 100%;
+      height: 80vh; /* уменьшенная высота */
+      background: url('https://via.placeholder.com/1920x1080') center/cover no-repeat fixed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      color: #fff;
+      overflow: hidden;
+    }
+    header::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(135deg, rgba(0,0,0,0.6), rgba(0,0,0,0.2));
+      z-index: 1;
+    }
+    header h1 {
+      font-size: 2.8rem;
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 20px;
+      z-index: 2;
+      max-width: 90%;
+    }
+    header p {
+      font-size: 1.2rem;
+      z-index: 2;
+      max-width: 85%;
+      margin-top: 10px;
+    }
+    /* Для экранов от 768px – запрет переноса строк в хедере (если нужно) */
+    @media (min-width: 768px) {
+      header h1, header p {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+    /* Для маленьких экранов – немного уменьшаем шрифты */
+    @media (max-width: 768px) {
+      header h1 { font-size: 2rem; }
+      header p { font-size: 1rem; }
+    }
+    
+    /* Общие стили для секций */
+    section { padding: 80px 20px; }
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+      font-size: 2.5rem;
+      font-family: 'Playfair Display', serif;
+      color: #444;
+    }
+    
+    /* Секция "Приглашение" */
+    .invitation {
+      font-family: 'Lora', serif;
+      background: linear-gradient(135deg, #fff, #f0f0f0);
+      padding: 60px 0;
+    }
+    .invitation h2, .invitation h4 { font-family: 'Playfair Display', serif; }
+    .invitation .lead { font-size: 1.4rem; font-weight: 700; }
+    .invitation p { font-size: 1.1rem; }
+    .invitation img {
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      transition: transform 0.3s;
+    }
+    .invitation img:hover { transform: scale(1.03); }
+    
+    /* Секция "О нас" */
+    .about .content {
+      max-width: 1000px;
+      margin: auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 20px;
+    }
+    .about .content img {
+      flex: 1 1 400px;
+      max-width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .about .content .text { flex: 1 1 400px; }
+    
+    /* Галерея */
+    .gallery .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .gallery .grid img {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      transition: transform 0.3s;
+    }
+    .gallery .grid img:hover { transform: scale(1.05); }
+    
+    /* Отсчет */
+    .countdown .time {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .countdown .time div {
+      background: #fff;
+      padding: 20px 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      min-width: 100px;
+    }
+    .countdown .time div h2 {
+      font-size: 2.5rem;
+      margin-bottom: 5px;
+      color: #d9534f;
+    }
+    .countdown .time div p { font-size: 1.1rem; }
+    
+    /* Подтверждение участия */
+    .confirmation form {
+      max-width: 600px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .confirmation input[type="radio"] { margin-right: 10px; }
+    .confirmation .option {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    /* Место проведения */
+    .location img {
+      max-width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      margin: auto;
+      display: block;
+    }
+    
+    /* Наша история */
+    .love-story .story {
+      max-width: 1000px;
+      margin: auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: center;
+    }
+    .love-story .story img {
+      flex: 1 1 400px;
+      max-width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .love-story .story .text { flex: 1 1 400px; }
+    
+    /* Footer */
+    footer {
+      background: #333;
+      color: #fff;
+      text-align: center;
+      padding: 20px 0;
+    }
+    
+    @media (max-width: 768px) {
+      .about .content, .love-story .story { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Навигация Bootstrap -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" data-aos="fade-down">
+    <div class="container">
+      <!-- <a class="navbar-brand" href="#home">Свадебное Приглашение</a> -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" 
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item"><a class="nav-link" href="#home">Главная</a></li>
+          <li class="nav-item"><a class="nav-link" href="#invitation">Приглашение</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">О нас</a></li>
+          <li class="nav-item"><a class="nav-link" href="#gallery">Галерея</a></li>
+          <li class="nav-item"><a class="nav-link" href="#countdown">Отсчет</a></li>
+          <li class="nav-item"><a class="nav-link" href="#confirmation">Подтверждение</a></li>
+          <li class="nav-item"><a class="nav-link" href="#location">Место проведения</a></li>
+          <li class="nav-item"><a class="nav-link" href="#love-story">Наша История</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Хедер -->
+  <header id="home" data-aos="zoom-in">
+    <h1 class="animate__animated animate__fadeInDown">Мы говорим "Да"!</h1>
+    <p class="animate__animated animate__fadeInUp">Приглашаем вас отпраздновать наш самый важный день</p>
+  </header>
+  
+  <!-- Секция "Приглашение" -->
+  <section id="invitation" class="invitation" data-aos="fade-up">
+    <div class="container">
+      <h2 class="section-title mb-5">Приглашение</h2>
+      <!-- Блок 1: Приветствие -->
+      <div class="row mb-5 align-items-center">
+        <div class="col-md-6" data-aos="fade-right">
+          <img src="https://via.placeholder.com/500x300" alt="Декоративное изображение" class="img-fluid mb-3">
+        </div>
+        <div class="col-md-6" data-aos="fade-left">
+          <p class="lead text-center">Дорогие наши близкие и самые замечательные люди!</p>
+        </div>
+      </div>
+      <!-- Блок 2: Вступление -->
+      <div class="row mb-5">
+        <div class="col" data-aos="fade-up">
+          <p class="text-center">
+            Мы будем счастливы, если вы разделите с нами один из самых важных и трепетных дней в нашей жизни.
+            Да-да! Мы женимся и приглашаем вас стать соучастниками этого события!
+          </p>
+        </div>
+      </div>
+      <!-- Блок 3: Программа мероприятия -->
+      <div class="row mb-5 align-items-center">
+        <div class="col-md-6" data-aos="fade-right">
+          <img src="https://via.placeholder.com/400x300" alt="Календарь" class="img-fluid">
+        </div>
+        <div class="col-md-6" data-aos="fade-left">
+          <h4 class="text-center">Программа мероприятия</h4>
+          <p class="text-center">
+            <strong>Ресторан Park Hall</strong><br>
+            улица Калиновского 12, Минск
+          </p>
+          <ul class="list-unstyled text-center">
+            <li><strong>15.30</strong> – приветственный фуршет</li>
+            <li><strong>16.00</strong> – трогательная церемония</li>
+            <li><strong>С 16.30</strong> – атмосфера праздника и танцев по полной</li>
+            <li><strong>22.00</strong> – тортик</li>
+          </ul>
+        </div>
+      </div>
+      <!-- Блок 5: Детали и QR код для чата -->
+      <div class="row mb-5 align-items-center">
+        <div class="col-md-6" data-aos="fade-right">
+          <img src="https://via.placeholder.com/300x300" alt="QR код для чата" class="img-fluid mb-3">
+        </div>
+        <div class="col-md-6" data-aos="fade-left">
+          <h4 class="text-center">Детали</h4>
+          <p>
+            Будем признательны, если вместо букетиков цветов вы подарите нам сертификаты в клевые места и магазины. Цветы быстро завянут, а сертификаты мы с радостью используем, вспоминая наш свадебный день.
+          </p>
+          <p class="text-center">
+            Здесь вы можете найти QR код для вступления в общий чат в телеграмме, куда можно присылать фото и видео после свадьбы.
+          </p>
+          <p class="text-center">
+            Подтвердите ваше присутствие не позднее <strong>9 июля</strong>!
+          </p>
+          <p class="text-center">
+            Если возникнут вопросы или хотите подготовить сюрприз, пишите нашему организатору Юлии: <strong>+375298751197</strong>.
+          </p>
+          <p class="text-center"><em>С любовью, ваши Иван и Анна!</em></p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Секция "О нас" -->
+  <section id="about" class="about" data-aos="fade-up">
+    <div class="container">
+      <h2 class="section-title">О нас</h2>
+      <div class="content d-flex flex-wrap align-items-center">
+        <img src="https://via.placeholder.com/500x400" alt="Фото пары" data-aos="zoom-in">
+        <div class="text" data-aos="fade-up">
+          <h3>Наша история любви</h3>
+          <p>
+            Мы встретились случайно, но с первого взгляда поняли, что судьба свела нас вместе. Наши сердца объединились, и мы решили провести всю жизнь, любя и поддерживая друг друга.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Секция "Галерея" -->
+  <section id="gallery" class="gallery" data-aos="fade-up">
+    <div class="container">
+      <h2 class="section-title text-center">Галерея</h2>
+      <div class="grid">
+        <img src="https://via.placeholder.com/400x300" alt="Фото 1">
+        <img src="https://via.placeholder.com/400x300" alt="Фото 2">
+        <img src="https://via.placeholder.com/400x300" alt="Фото 3">
+        <img src="https://via.placeholder.com/400x300" alt="Фото 4">
+        <img src="https://via.placeholder.com/400x300" alt="Фото 5">
+        <img src="https://via.placeholder.com/400x300" alt="Фото 6">
+      </div>
+    </div>
+  </section>
+  
+  <!-- Секция "Отсчет" -->
+  <section id="countdown" class="countdown" data-aos="fade-up">
+    <div class="container">
+      <h2 class="section-title text-center">До свадьбы осталось</h2>
+      <div class="time d-flex flex-wrap justify-content-center">
+        <div>
+          <h2 id="days">00</h2>
+          <p>Дней</p>
+        </div>
+        <div>
+          <h2 id="hours">00</h2>
+          <p>Часов</p>
+        </div>
+        <div>
+          <h2 id="minutes">00</h2>
+          <p>Минут</p>
+        </div>
+        <div>
+          <h2 id="seconds">00</h2>
+          <p>Секунд</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Секция "Подтверждение участия" -->
+  <section id="confirmation" class="confirmation" data-aos="fade-up">
+    <div class="container">
+      <h2 class="section-title text-center">Подтверждение участия</h2>
+      <p class="text-center">
+        Пожалуйста, выберите, придете ли вы на наше торжество. Подтвердите свое присутствие не позднее 9 июля. Вы всегда можете изменить свой выбор.
+      </p>
+      <form id="confirmation-form">
+        <div class="option d-flex justify-content-center">
+          <label class="mr-3">
+            <input type="radio" name="attendance" value="yes" required> Приду
+          </label>
+          <label>
+            <input type="radio" name="attendance" value="no"> Не приду
+          </label>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-danger">Сохранить выбор</button>
+        </div>
+      </form>
+    </div>
+  </section>
+  
+  <!-- Секция "Место проведения" -->
+  <section id="location" class="location" data-aos="fade-up">
+    <div class="container">
+      <h2 class="section-title text-center">Место проведения</h2>
+      <p class="text-center">
+        Наше торжество состоится в прекрасном месте, окруженном природой и уютом.
+      </p>
+      <img src="https://via.placeholder.com/800x400" alt="Место проведения" class="img-fluid">
+    </div>
+  </section>
+  
+  <!-- Секция "Наша история" -->
+  <section id="love-story" class="love-story" data-aos="fade-up">
+    <div class="container">
+      <h2 class="section-title text-center">Наша история</h2>
+      <div class="story d-flex flex-wrap align-items-center">
+        <img src="https://via.placeholder.com/500x400" alt="Совместная фотография" data-aos="zoom-in">
+        <div class="text" data-aos="fade-up">
+          <h3>От первого взгляда до вечности</h3>
+          <p>
+            Наша история началась с дружеского знакомства, которое постепенно переросло в крепкую любовь. Вместе мы пережили множество ярких моментов, смеялись, поддерживали друг друга и мечтали о будущем. Сегодня мы рады поделиться этим радостным событием с вами!
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer data-aos="fade-up">
+    <div class="container">
+      <p>&copy; 2025 Свадебное Приглашение. Все права защищены.</p>
+    </div>
+  </footer>
+  
+  <!-- Скрипты: jQuery, Popper, Bootstrap, AOS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" 
+          integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" 
+          crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" 
+          integrity="sha384-9/reFTGAW83EW2RDuP72rFq43TtXv4+p9tjCK+WprV7LT1bXh+WZh58N9jp3T04" 
+          crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true });
+    
+    // Плавная прокрутка для ссылок
+    document.querySelectorAll('nav a').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+    
+    // Таймер отсчета до свадьбы
+    function updateCountdown() {
+      const weddingDate = new Date('August 9, 2025 16:00:00').getTime();
+      const now = new Date().getTime();
+      const distance = weddingDate - now;
+      
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      
+      document.getElementById('days').innerText = days < 10 ? '0' + days : days;
+      document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
+      document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
+      document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+    
+    // Обработка формы подтверждения участия
+    document.getElementById('confirmation-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const choice = document.querySelector('input[name="attendance"]:checked').value;
+      alert('Ваш выбор: ' + (choice === 'yes' ? 'Приду' : 'Не приду') + '. Вы всегда можете изменить его.');
+    });
+  </script>
+</body>
+</html>
