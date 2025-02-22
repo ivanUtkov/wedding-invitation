@@ -453,7 +453,7 @@
           .then(data => {
             if (data.found) {
               document.getElementById('uniqueInvitation').innerText = data.invitationText;
-              document.getElementByid('rsvp-block').style.display = 'block';
+              document.getElementById('rsvp-block').style.display = 'block';
               if (data.attendance) {
                 let selector = `input[name="attendance"][value="${data.attendance}"]`;
                 let radio = document.querySelector(selector);
