@@ -251,7 +251,7 @@
   <!-- Хедер -->
   <header id="home" data-aos="zoom-in">
     <h1 class="animate__animated animate__fadeInDown">Мы говорим "Да"!</h1>
-    <p class="animate__animated animate__fadeInUp">Приглашаем вас отпраздновать наш самый важный день</p>
+    <p id="uniqueInvitation" class="animate__animated animate__fadeInUp">Приглашаем вас отпраздновать наш самый важный день</p>
   </header>
   
   <!-- Секция "Приглашение" -->
@@ -377,7 +377,7 @@
   </section>
   
   <!-- Секция "Подтверждение участия" -->
-  <section id="confirmation" class="confirmation" data-aos="fade-up">
+  <section id="rsvp-block" class="confirmation" data-aos="fade-up" style="display: none;">
     <div class="container">
       <h2 class="section-title text-center">Подтверждение участия</h2>
       <p class="text-center">
@@ -443,6 +443,64 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const urlParams = new URLSearchParams(window.location.search);
+      const guestHash = urlParams.get('hash');
+
+      if (guestHash) {
+        fetch(`https://script.google.com/macros/s/AKfycbyv47CwXkbDdzoWfPsrswLCK6FCl0DR4s3_yCsXuh9NJ0urLLamO_Jz3iBBkcCdgrO-/exec?hash=${guestHash}`)
+          .then(response => response.json())
+          .then(data => {
+            if (data.found) {
+              document.getElementById('uniqueInvitation').innerText = data.invitationText;
+              document.getElementByid('rsvp-block').style.display = 'block';
+              if (data.attendance) {
+                let selector = `input[name="attendance"][value="${data.attendance}"]`;
+                let radio = document.querySelector(selector);
+                if (radio) {
+                  radio.checked = true;
+                }
+              }
+            } else {
+              document.getElementById('uniqueInvitation').innerText = "Приглашаем вас отпраздновать наш самый важный день";
+              document.getElementById('rsvp-block').style.display = 'none';
+            }
+          })
+          .catch(error => {
+            console.error('ошибка получения данных гостя: ', error);
+          });
+      }
+
+      document.getElementById('confirmation-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const attendance = document.querySelector('input[name="attendance"]:checked').value;
+        
+        fetch(`https://script.google.com/macros/s/AKfycbyv47CwXkbDdzoWfPsrswLCK6FCl0DR4s3_yCsXuh9NJ0urLLamO_Jz3iBBkcCdgrO-/exec`, {
+          method: 'POST',
+          mode: 'cors',
+          headers: {
+             'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+             hash: guestHash,
+             attendance: attendance
+          })
+        })
+        .then(response => response.json())
+        .then(data => {
+           if (data.success) {
+              alert("Ваш выбор сохранён!");
+           } else {
+              alert("Произошла ошибка при сохранении. Попробуйте снова.");
+           }
+        })
+        .catch(error => {
+           console.error('Ошибка обновления RSVP:', error);
+        });
+      });
+    }
+    );
+
     AOS.init({ duration: 1000, once: true });
     
     // Плавная прокрутка для ссылок
@@ -474,13 +532,6 @@
     }
     updateCountdown();
     setInterval(updateCountdown, 1000);
-    
-    // Обработка формы подтверждения участия
-    document.getElementById('confirmation-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const choice = document.querySelector('input[name="attendance"]:checked').value;
-      alert('Ваш выбор: ' + (choice === 'yes' ? 'Приду' : 'Не приду') + '. Вы всегда можете изменить его.');
-    });
   </script>
 </body>
 </html>
