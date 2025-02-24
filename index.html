@@ -448,7 +448,7 @@
       const guestHash = urlParams.get('hash');
 
       if (guestHash) {
-        fetch(`https://script.google.com/macros/s/AKfycbyv47CwXkbDdzoWfPsrswLCK6FCl0DR4s3_yCsXuh9NJ0urLLamO_Jz3iBBkcCdgrO-/exec?hash=${guestHash}`)
+        fetch(`https://script.google.com/macros/s/AKfycbz8Sr3jCCIBBebFDZrN8tuigvet6CSLzOUrAZvrUSYTudRuxqbSPn-nuJIek5FwErur/exec?hash=${guestHash}`)
           .then(response => response.json())
           .then(data => {
             if (data.found) {
@@ -474,10 +474,12 @@
       document.getElementById('confirmation-form').addEventListener('submit', function(e) {
         e.preventDefault();
         const attendance = document.querySelector('input[name="attendance"]:checked').value;
+        console.log("guestHash:", guestHash);
+        console.log("POST data:", JSON.stringify({ hash: guestHash, attendance: attendance }));
+
         
-        fetch(`https://script.google.com/macros/s/AKfycbyv47CwXkbDdzoWfPsrswLCK6FCl0DR4s3_yCsXuh9NJ0urLLamO_Jz3iBBkcCdgrO-/exec`, {
+        fetch(`https://script.google.com/macros/s/AKfycbz8Sr3jCCIBBebFDZrN8tuigvet6CSLzOUrAZvrUSYTudRuxqbSPn-nuJIek5FwErur/exec`, {
           method: 'POST',
-          mode: 'cors',
           headers: {
              'Content-Type': 'application/json'
           },
