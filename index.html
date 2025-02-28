@@ -437,9 +437,7 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" 
           integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" 
           crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" 
-          integrity="sha384-9/reFTGAW83EW2RDuP72rFq43TtXv4+p9tjCK+WprV7LT1bXh+WZh58N9jp3T04" 
-          crossorigin="anonymous"></script>
+  <script src="popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
@@ -448,57 +446,54 @@
       const guestHash = urlParams.get('hash');
 
       if (guestHash) {
-        fetch(`https://script.google.com/macros/s/AKfycbz8Sr3jCCIBBebFDZrN8tuigvet6CSLzOUrAZvrUSYTudRuxqbSPn-nuJIek5FwErur/exec?hash=${guestHash}`)
-          .then(response => response.json())
-          .then(data => {
-            if (data.found) {
-              document.getElementById('uniqueInvitation').innerText = data.invitationText;
-              document.getElementById('rsvp-block').style.display = 'block';
-              if (data.attendance) {
-                let selector = `input[name="attendance"][value="${data.attendance}"]`;
-                let radio = document.querySelector(selector);
-                if (radio) {
-                  radio.checked = true;
-                }
-              }
-            } else {
-              document.getElementById('uniqueInvitation').innerText = "Приглашаем вас отпраздновать наш самый важный день";
-              document.getElementById('rsvp-block').style.display = 'none';
-            }
-          })
-          .catch(error => {
-            console.error('ошибка получения данных гостя: ', error);
-          });
+        fetch(`https://wedding-invite-backend-main-wlkynd.laravel.cloud/api/guest?hash=${guestHash}`)
+                .then(response => response.json())
+                .then(data => {
+                  if (data.found) {
+                    document.getElementById('uniqueInvitation').innerText = data.invitationText;
+                    document.getElementById('rsvp-block').style.display = 'block';
+                    if (data.attendance) {
+                      let selector = `input[name="attendance"][value="${data.attendance}"]`;
+                      let radio = document.querySelector(selector);
+                      if (radio) {
+                        radio.checked = true;
+                      }
+                    }
+                  } else {
+                    document.getElementById('uniqueInvitation').innerText = "Приглашаем вас отпраздновать наш самый важный день";
+                    document.getElementById('rsvp-block').style.display = 'none';
+                  }
+                })
+                .catch(error => {
+                  console.error('Ошибка получения данных гостя:', error);
+                });
       }
 
       document.getElementById('confirmation-form').addEventListener('submit', function(e) {
         e.preventDefault();
         const attendance = document.querySelector('input[name="attendance"]:checked').value;
-        console.log("guestHash:", guestHash);
-        console.log("POST data:", JSON.stringify({ hash: guestHash, attendance: attendance }));
 
-        
-        fetch(`https://script.google.com/macros/s/AKfycbz8Sr3jCCIBBebFDZrN8tuigvet6CSLzOUrAZvrUSYTudRuxqbSPn-nuJIek5FwErur/exec`, {
+        fetch(`https://wedding-invite-backend-main-wlkynd.laravel.cloud/api/guest`, {
           method: 'POST',
           headers: {
-             'Content-Type': 'application/json'
+            'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-             hash: guestHash,
-             attendance: attendance
+            hash: guestHash,
+            attendance: attendance
           })
         })
-        .then(response => response.json())
-        .then(data => {
-           if (data.success) {
-              alert("Ваш выбор сохранён!");
-           } else {
-              alert("Произошла ошибка при сохранении. Попробуйте снова.");
-           }
-        })
-        .catch(error => {
-           console.error('Ошибка обновления RSVP:', error);
-        });
+                .then(response => response.json())
+                .then(data => {
+                  if (data.success) {
+                    alert("Ваш выбор сохранён!");
+                  } else {
+                    alert("Произошла ошибка при сохранении. Попробуйте снова.");
+                  }
+                })
+                .catch(error => {
+                  console.error('Ошибка обновления RSVP:', error);
+                });
       });
     }
     );
