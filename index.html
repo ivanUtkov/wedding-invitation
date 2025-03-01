@@ -16,7 +16,7 @@
   <style>
     /* Reset и базовые стили */
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Roboto', sans-serif; background: #f7f7f7; color: #333; line-height: 1.6; }
+    body { background: #f7f7f7; color: #333; line-height: 1.6; }
     a { text-decoration: none; color: inherit; }
     
     /* Навигация */
@@ -34,7 +34,7 @@
     .navbar-brand, .nav-link, .navbar-toggler {
       white-space: nowrap;
     }
-    .navbar-brand, .nav-link { font-family: 'Poppins', sans-serif; font-weight: 600; }
+    .navbar-brand, .nav-link { font-weight: 600; }
     .navbar-brand { font-size: 1.8rem; }
     .navbar-toggler { margin-left: auto; }
     /* Для навигационных ссылок – запрещаем перенос строк */
@@ -65,7 +65,7 @@
     }
     header h1 {
       font-size: 2.8rem;
-      font-family: 'Playfair Display', serif;
+      font-family: 'Georgia', sans-serif;
       margin-bottom: 20px;
       z-index: 2;
       max-width: 90%;
@@ -96,17 +96,14 @@
       text-align: center;
       margin-bottom: 50px;
       font-size: 2.5rem;
-      font-family: 'Playfair Display', serif;
       color: #444;
     }
     
     /* Секция "Приглашение" */
     .invitation {
-      font-family: 'Lora', serif;
       background: linear-gradient(135deg, #fff, #f0f0f0);
       padding: 60px 0;
     }
-    .invitation h2, .invitation h4 { font-family: 'Playfair Display', serif; }
     .invitation .lead { font-size: 1.4rem; font-weight: 700; }
     .invitation p { font-size: 1.1rem; }
     .invitation img {
@@ -238,33 +235,34 @@
           <li class="nav-item"><a class="nav-link" href="#home">Главная</a></li>
           <li class="nav-item"><a class="nav-link" href="#invitation">Приглашение</a></li>
           <li class="nav-item"><a class="nav-link" href="#about">О нас</a></li>
-          <li class="nav-item"><a class="nav-link" href="#gallery">Галерея</a></li>
           <li class="nav-item"><a class="nav-link" href="#countdown">Отсчет</a></li>
           <li class="nav-item"><a class="nav-link" href="#confirmation">Подтверждение</a></li>
           <li class="nav-item"><a class="nav-link" href="#location">Место проведения</a></li>
-          <li class="nav-item"><a class="nav-link" href="#love-story">Наша История</a></li>
         </ul>
       </div>
     </div>
   </nav>
   
   <!-- Хедер -->
-  <header id="home" data-aos="zoom-in">
-    <h1 class="animate__animated animate__fadeInDown">Мы говорим "Да"!</h1>
-    <p id="uniqueInvitation" class="animate__animated animate__fadeInUp">Приглашаем вас отпраздновать наш самый важный день</p>
+  <header id="home" data-aos="zoom-in" style="
+  background-image: url('DSCF0069.JPG');
+  background-position: 0% 69%;
+  ">
+    <h1 class="animate__animated animate__fadeInDown" style="font-size: 80px;">Ivan & Anna</h1>
+    <p class="animate__animated animate__fadeInUp" style="margin-top: -2px; font-size: 27px;">09.08.2025</p>
   </header>
   
   <!-- Секция "Приглашение" -->
   <section id="invitation" class="invitation" data-aos="fade-up">
     <div class="container">
-      <h2 class="section-title mb-5">Приглашение</h2>
+      <h2 class="section-title mb-5">Дорогие наши близкие и самые замечательные люди!</h2>
       <!-- Блок 1: Приветствие -->
       <div class="row mb-5 align-items-center">
         <div class="col-md-6" data-aos="fade-right">
-          <img src="https://via.placeholder.com/500x300" alt="Декоративное изображение" class="img-fluid mb-3">
+          <img src="DSCF0015.JPG" alt="Декоративное изображение" class="img-fluid mb-3">
         </div>
-        <div class="col-md-6" data-aos="fade-left">
-          <p class="lead text-center">Дорогие наши близкие и самые замечательные люди!</p>
+        <div class="col-md-6" data-aos="fade-right">
+          <p id="uniqueInvitation" class="lead text-center">Дорогие наши близкие и самые замечательные люди!</p>
         </div>
       </div>
       <!-- Блок 2: Вступление -->
@@ -279,7 +277,7 @@
       <!-- Блок 3: Программа мероприятия -->
       <div class="row mb-5 align-items-center">
         <div class="col-md-6" data-aos="fade-right">
-          <img src="https://via.placeholder.com/400x300" alt="Календарь" class="img-fluid">
+          <img src="IMG_9704.JPG" alt="Календарь" class="img-fluid">
         </div>
         <div class="col-md-6" data-aos="fade-left">
           <h4 class="text-center">Программа мероприятия</h4>
@@ -290,7 +288,7 @@
           <ul class="list-unstyled text-center">
             <li><strong>15.30</strong> – приветственный фуршет</li>
             <li><strong>16.00</strong> – трогательная церемония</li>
-            <li><strong>С 16.30</strong> – атмосфера праздника и танцев по полной</li>
+            <li><strong>16.30 - 22.00</strong> – атмосфера праздника и танцев по полной</li>
             <li><strong>22.00</strong> – тортик</li>
           </ul>
         </div>
@@ -325,28 +323,13 @@
     <div class="container">
       <h2 class="section-title">О нас</h2>
       <div class="content d-flex flex-wrap align-items-center">
-        <img src="https://via.placeholder.com/500x400" alt="Фото пары" data-aos="zoom-in">
+        <img src="photo_2025-03-01_21-43-15.jpg" alt="Фото пары" data-aos="zoom-in">
         <div class="text" data-aos="fade-up">
           <h3>Наша история любви</h3>
           <p>
             Мы встретились случайно, но с первого взгляда поняли, что судьба свела нас вместе. Наши сердца объединились, и мы решили провести всю жизнь, любя и поддерживая друг друга.
           </p>
         </div>
-      </div>
-    </div>
-  </section>
-  
-  <!-- Секция "Галерея" -->
-  <section id="gallery" class="gallery" data-aos="fade-up">
-    <div class="container">
-      <h2 class="section-title text-center">Галерея</h2>
-      <div class="grid">
-        <img src="https://via.placeholder.com/400x300" alt="Фото 1">
-        <img src="https://via.placeholder.com/400x300" alt="Фото 2">
-        <img src="https://via.placeholder.com/400x300" alt="Фото 3">
-        <img src="https://via.placeholder.com/400x300" alt="Фото 4">
-        <img src="https://via.placeholder.com/400x300" alt="Фото 5">
-        <img src="https://via.placeholder.com/400x300" alt="Фото 6">
       </div>
     </div>
   </section>
@@ -381,7 +364,7 @@
     <div class="container">
       <h2 class="section-title text-center">Подтверждение участия</h2>
       <p class="text-center">
-        Пожалуйста, выберите, придете ли вы на наше торжество. Подтвердите свое присутствие не позднее 9 июля. Вы всегда можете изменить свой выбор.
+        Сможете ли вы присоединиться к нашему празднику? Подтвердите, пожалуйста, свое присутствие не позднее 9 июля. Вы всегда можете изменить свой выбор.
       </p>
       <form id="confirmation-form">
         <div class="option d-flex justify-content-center">
@@ -407,22 +390,6 @@
         Наше торжество состоится в прекрасном месте, окруженном природой и уютом.
       </p>
       <img src="https://via.placeholder.com/800x400" alt="Место проведения" class="img-fluid">
-    </div>
-  </section>
-  
-  <!-- Секция "Наша история" -->
-  <section id="love-story" class="love-story" data-aos="fade-up">
-    <div class="container">
-      <h2 class="section-title text-center">Наша история</h2>
-      <div class="story d-flex flex-wrap align-items-center">
-        <img src="https://via.placeholder.com/500x400" alt="Совместная фотография" data-aos="zoom-in">
-        <div class="text" data-aos="fade-up">
-          <h3>От первого взгляда до вечности</h3>
-          <p>
-            Наша история началась с дружеского знакомства, которое постепенно переросло в крепкую любовь. Вместе мы пережили множество ярких моментов, смеялись, поддерживали друг друга и мечтали о будущем. Сегодня мы рады поделиться этим радостным событием с вами!
-          </p>
-        </div>
-      </div>
     </div>
   </section>
   
