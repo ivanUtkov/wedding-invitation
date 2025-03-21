@@ -223,9 +223,8 @@
 </head>
 <body>
   <!-- Навигация Bootstrap -->
-  <nav class="navbar navbar-expand-lg navbar-light fixed-top" data-aos="fade-down">
+  <!-- <nav class="navbar navbar-expand-lg navbar-light fixed-top" data-aos="fade-down">
     <div class="container">
-      <!-- <a class="navbar-brand" href="#home">Свадебное Приглашение</a> -->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" 
               aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -241,16 +240,15 @@
         </ul>
       </div>
     </div>
-  </nav>
+  </nav> -->
   
   <!-- Хедер -->
-  <header id="home" data-aos="zoom-in" style="
-  background-image: url('DSCF0069.JPG');
-  background-position: 0% 69%;
-  ">
-    <h1 class="animate__animated animate__fadeInDown" style="font-size: 80px;">Ivan & Anna</h1>
-    <p class="animate__animated animate__fadeInUp" style="margin-top: -2px; font-size: 27px;">09.08.2025</p>
-  </header>
+  <header id="home" data-aos="zoom-in" 
+        class="d-flex flex-column justify-content-start justify-content-md-center"
+        style="background-image: url('DSCF0069.JPG'); background-position: 0% 69%; height: 80vh;">
+  <h1 class="animate__animated animate__fadeInDown" style="font-size: 80px;">Ivan & Anna</h1>
+  <p class="animate__animated animate__fadeInUp" style="margin-top: -2px; font-size: 27px;">09.08.2025</p>
+</header>
   
   <!-- Секция "Приглашение" -->
   <section id="invitation" class="invitation" data-aos="fade-up">
@@ -300,7 +298,7 @@
         </div>
         <div class="col-md-6" data-aos="fade-left">
           <h4 class="text-center">Детали</h4>
-          <p>
+          <p class="text-center">
             Будем признательны, если вместо букетиков цветов вы подарите нам сертификаты в клевые места и магазины. Цветы быстро завянут, а сертификаты мы с радостью используем, вспоминая наш свадебный день.
           </p>
           <p class="text-center">
@@ -319,7 +317,7 @@
   </section>
   
   <!-- Секция "О нас" -->
-  <section id="about" class="about" data-aos="fade-up">
+  <!-- <section id="about" class="about" data-aos="fade-up">
     <div class="container">
       <h2 class="section-title">О нас</h2>
       <div class="content d-flex flex-wrap align-items-center">
@@ -332,7 +330,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
   
   <!-- Секция "Отсчет" -->
   <section id="countdown" class="countdown" data-aos="fade-up">
@@ -382,17 +380,6 @@
     </div>
   </section>
   
-  <!-- Секция "Место проведения" -->
-  <section id="location" class="location" data-aos="fade-up">
-    <div class="container">
-      <h2 class="section-title text-center">Место проведения</h2>
-      <p class="text-center">
-        Наше торжество состоится в прекрасном месте, окруженном природой и уютом.
-      </p>
-      <img src="https://via.placeholder.com/800x400" alt="Место проведения" class="img-fluid">
-    </div>
-  </section>
-  
   <!-- Footer -->
   <footer data-aos="fade-up">
     <div class="container">
@@ -408,7 +395,17 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+
+    window.addEventListener('load', function () {
+      window.scrollTo(0, 0);
+    });
+
     document.addEventListener("DOMContentLoaded", function () {
+      window.scrollTo(0, 0);
+
       const urlParams = new URLSearchParams(window.location.search);
       const guestHash = urlParams.get('hash');
 
