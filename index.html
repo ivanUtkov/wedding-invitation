@@ -219,36 +219,33 @@
     @media (max-width: 768px) {
       .about .content, .love-story .story { flex-direction: column; }
     }
+
+    @media (min-width: 992px) {
+      .custom-img {
+        max-width: 400px;
+        height: auto; /* сохраняем пропорции */
+        margin: auto; /* опционально: для центрирования */
+      }
+    }
+
+    @media (min-width: 992px) {
+      .custom-img2 {
+        max-width: 200px;
+        height: auto; /* сохраняем пропорции */
+        margin: auto; /* опционально: для центрирования */
+      }
+    }
   </style>
 </head>
 <body>
-  <!-- Навигация Bootstrap -->
-  <!-- <nav class="navbar navbar-expand-lg navbar-light fixed-top" data-aos="fade-down">
-    <div class="container">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" 
-              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item"><a class="nav-link" href="#home">Главная</a></li>
-          <li class="nav-item"><a class="nav-link" href="#invitation">Приглашение</a></li>
-          <li class="nav-item"><a class="nav-link" href="#about">О нас</a></li>
-          <li class="nav-item"><a class="nav-link" href="#countdown">Отсчет</a></li>
-          <li class="nav-item"><a class="nav-link" href="#confirmation">Подтверждение</a></li>
-          <li class="nav-item"><a class="nav-link" href="#location">Место проведения</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav> -->
   
   <!-- Хедер -->
   <header id="home" data-aos="zoom-in" 
         class="d-flex flex-column justify-content-start justify-content-md-center"
         style="background-image: url('DSCF0069.JPG'); background-position: 0% 69%; height: 80vh;">
-  <h1 class="animate__animated animate__fadeInDown" style="font-size: 80px;">Ivan & Anna</h1>
-  <p class="animate__animated animate__fadeInUp" style="margin-top: -2px; font-size: 27px;">09.08.2025</p>
-</header>
+                <h1 class="animate__animated animate__fadeInDown" style="font-size: 80px;">Ivan & Anna</h1>
+                <p class="animate__animated animate__fadeInUp" style="margin-top: -2px; font-size: 27px;">09.08.2025</p>
+  </header>
   
   <!-- Секция "Приглашение" -->
   <section id="invitation" class="invitation" data-aos="fade-up">
@@ -257,7 +254,7 @@
       <!-- Блок 1: Приветствие -->
       <div class="row mb-5 align-items-center">
         <div class="col-md-6" data-aos="fade-right">
-          <img src="DSCF0015.JPG" alt="Декоративное изображение" class="img-fluid mb-3">
+          <img src="DSCF0015.JPG" alt="Декоративное изображение" class="img-fluid custom-img mb-3">
         </div>
         <div class="col-md-6" data-aos="fade-right">
           <p id="uniqueInvitation" class="lead text-center">Дорогие наши близкие и самые замечательные люди!</p>
@@ -293,8 +290,8 @@
       </div>
       <!-- Блок 5: Детали и QR код для чата -->
       <div class="row mb-5 align-items-center">
-        <div class="col-md-6" data-aos="fade-right">
-          <img src="https://via.placeholder.com/300x300" alt="QR код для чата" class="img-fluid mb-3">
+        <div class="col-md-6 custom-img2" data-aos="fade-right">
+          <a href="https://t.me/ivan_and_anna"><img src="photo_2025-03-22 14.50.51.jpeg" alt="QR код для чата" class="img-fluid mb-3"></a>
         </div>
         <div class="col-md-6" data-aos="fade-left">
           <h4 class="text-center">Детали</h4>
@@ -302,7 +299,7 @@
             Будем признательны, если вместо букетиков цветов вы подарите нам сертификаты в клевые места и магазины. Цветы быстро завянут, а сертификаты мы с радостью используем, вспоминая наш свадебный день.
           </p>
           <p class="text-center">
-            Здесь вы можете найти QR код для вступления в общий чат в телеграмме, куда можно присылать фото и видео после свадьбы.
+            Здесь вы можете найти QR код для вступления в общий <a href="https://t.me/ivan_and_anna"><u>чат</u></a> в телеграмме, куда можно присылать фото и видео после свадьбы.
           </p>
           <p class="text-center">
             Подтвердите ваше присутствие не позднее <strong>9 июля</strong>!
